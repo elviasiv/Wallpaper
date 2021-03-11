@@ -1,4 +1,4 @@
-package com.elviva.wallpaperboi
+package com.elviva.wallpaperboi.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,9 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.elviva.wallpaperboi.activities.BaseActivity
-import com.elviva.wallpaperboi.activities.FavoritesActivity
-import com.elviva.wallpaperboi.activities.WallpaperDetailsActivity
 import com.elviva.wallpaperboi.adapters.WallpaperAdapter
 import com.elviva.wallpaperboi.databinding.ActivityMainBinding
 import com.elviva.wallpaperboi.models.Wallpaper
@@ -33,15 +30,18 @@ class MainActivity : AppCompatActivity() {
         loadData()
         setupRecyclerView()
 
+        //API call in coroutine
+        //If we use MVVM architecture, we would make retrofit call in "repository"
+        //and then call that from the viewmodel
         lifecycleScope.launchWhenCreated {
             binding.progressBar.isVisible = true
             val response = try {
                 RetrofitInstance.api.getWallpaper(CLIENT_ID)
-            } catch (e: IOException){
+            } catch (e: IOException){  //We dont have internet connection or something similar
                 Log.e("MainActivity", "IOException, might not have internet")
                 binding.progressBar.isVisible = false
                 return@launchWhenCreated
-            } catch (e: HttpException){
+            } catch (e: HttpException){ //Not getting a 2** response
                 Log.e("MainActivity", "HTTPException, unexpected response")
                 binding.progressBar.isVisible = false
                 return@launchWhenCreated
@@ -92,9 +92,9 @@ class MainActivity : AppCompatActivity() {
 
     //Loading data from shared preferences
     private fun loadData(){
-        var sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE)
-        var gson = Gson()
-        var json = sharedPreferences.getString("Favorites list", null)
+        val sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("Favorites list", null)
         val type = object : TypeToken<ArrayList<Wallpaper>>() {}.type
         Constants.mFavoritesList = gson.fromJson(json, type)
     }

@@ -29,7 +29,6 @@ import java.net.URISyntaxException
 import java.net.URL
 
 //In this activity all chosen wallpaper data is displayed
-//
 class WallpaperDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWallpaperDetailsBinding
@@ -41,7 +40,6 @@ class WallpaperDetailsActivity : AppCompatActivity() {
     private var width: Int? = null
     private var height: Int? = null
     private var imageUrl: String? = ""
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,6 +57,10 @@ class WallpaperDetailsActivity : AppCompatActivity() {
         }
     }
 
+    //Never tried anything with "sharing" between apps so it was interesting to try it out
+    //Looked up a lot of ways and found you can use Picasso, which I never used, so it was a
+    //good idea to try it out. Didn't work.
+    //We should use a database like room to save our favorite wallpapers and share them I think
     fun shareItem(url: String?) {
 
         Picasso.get().load(url).into(object : Target {
@@ -93,36 +95,9 @@ class WallpaperDetailsActivity : AppCompatActivity() {
         return bmpUri
     }
 
-    private fun shareImage(){
-        //val uri: Uri = Uri.parse(imageUrl)
-        //Log.i("DetailsActivity", "URI = $uri")
-        val myUrlStr = imageUrl
-        val url: URL
-        val uri: Uri
-        try {
-            url = URL(myUrlStr)
-            uri = Uri.parse(url.toURI().toString())
-
-            Log.i("DetailsActivity", "URI = $uri")
-            val shareIntent: Intent = Intent().apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_STREAM, uri)
-                type = "text/html"
-            }
-            startActivity(Intent.createChooser(shareIntent, "send to"))
-        } catch (e1: MalformedURLException) {
-            e1.printStackTrace()
-        } catch (e: URISyntaxException) {
-            e.printStackTrace()
-        }
-
-
-
-    }
-
     //Getting data from intent and setting up the UI
     private fun setupUi(){
-        id = intent.getStringExtra("ID")
+        id = intent.getStringExtra("ID")                        //I should use strings as constants...
         name = intent.getStringExtra("USER_NAME")
         description = intent.getStringExtra("DESCRIPTION")
         altDescription = intent.getStringExtra("ALT_DESCRIPTION")

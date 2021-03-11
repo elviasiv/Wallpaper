@@ -3,18 +3,10 @@ package com.elviva.wallpaperboi.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.elviva.wallpaperboi.MainActivity
-import com.elviva.wallpaperboi.R
 import com.elviva.wallpaperboi.adapters.FavoriteWallpapersAdapter
-import com.elviva.wallpaperboi.adapters.WallpaperAdapter
 import com.elviva.wallpaperboi.databinding.ActivityFavoritesBinding
-import com.elviva.wallpaperboi.models.Wallpaper
-import com.elviva.wallpaperboi.util.Constants
 import com.elviva.wallpaperboi.util.Constants.mFavoritesList
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 class FavoritesActivity : AppCompatActivity() {
 

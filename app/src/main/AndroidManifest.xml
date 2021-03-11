@@ -19,7 +19,7 @@
             android:label="Favorites"/>
         <activity android:name=".activities.WallpaperDetailsActivity"
             android:label="Wallpaper Details"/>
-        <activity android:name=".MainActivity"
+        <activity android:name=".activities.MainActivity"
             android:label="Wallpapers">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -6,9 +6,11 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-//Retrofit instance where we can call the api
+//Custom retrofit object singleton
 object RetrofitInstance {
 
+    //We initialize it by lazy so that it wont be initialized right away
+    //instead it will be initialize when we first access this api
     val api: WallpaperAPI by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
