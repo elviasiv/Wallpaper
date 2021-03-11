@@ -11,7 +11,8 @@ import com.elviva.wallpaperboi.R
 import com.elviva.wallpaperboi.databinding.ItemWallpaperBinding
 import com.elviva.wallpaperboi.models.Wallpaper
 
-open class WallpaperAdapter(
+//Recycler view adapter for main activity where all wallpapers pulled from API are displayed
+class WallpaperAdapter(
     private val context: Context
 ) : RecyclerView.Adapter<WallpaperAdapter.MyViewHolder>() {
 

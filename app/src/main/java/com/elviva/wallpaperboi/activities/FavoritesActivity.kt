@@ -26,14 +26,14 @@ class FavoritesActivity : AppCompatActivity() {
         binding = ActivityFavoritesBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupRecyclerView()
-        Log.i("FavoritesActivity", "mFavoritesList = $mFavoritesList ")
 
-
+        //fab on click to take us back to main activity
         binding.fabFavorites.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
 
+        //In favorite wallpapers tab we can still press on selected wallpaper and find out it's details
         favoriteWallpaperAdapter.setOnClickListener(object: FavoriteWallpapersAdapter.OnClickListener{
             override fun onClick(position: Int) {
                 val intent = Intent(this@FavoritesActivity, WallpaperDetailsActivity::class.java)
@@ -50,6 +50,7 @@ class FavoritesActivity : AppCompatActivity() {
         })
     }
 
+    //Setting up recycler view with adapter
     private fun setupRecyclerView(){
         binding.rvFavoriteWallpapers.apply {
             favoriteWallpaperAdapter = FavoriteWallpapersAdapter(this@FavoritesActivity)
@@ -58,7 +59,5 @@ class FavoritesActivity : AppCompatActivity() {
         }
 
     }
-
-
 
 }

@@ -12,7 +12,8 @@ import com.elviva.wallpaperboi.databinding.ItemWallpaperBinding
 import com.elviva.wallpaperboi.models.Wallpaper
 import com.elviva.wallpaperboi.util.Constants.mFavoritesList
 
-open class FavoriteWallpapersAdapter (
+//Another recycler view adapter for favorite wallpapers
+class FavoriteWallpapersAdapter (
     private val context: Context
 ) : RecyclerView.Adapter<FavoriteWallpapersAdapter.MyViewHolder>() {
 

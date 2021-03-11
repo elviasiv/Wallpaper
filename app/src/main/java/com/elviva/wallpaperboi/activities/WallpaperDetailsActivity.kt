@@ -28,7 +28,8 @@ import java.net.MalformedURLException
 import java.net.URISyntaxException
 import java.net.URL
 
-
+//In this activity all chosen wallpaper data is displayed
+//
 class WallpaperDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWallpaperDetailsBinding
@@ -119,6 +120,7 @@ class WallpaperDetailsActivity : AppCompatActivity() {
 
     }
 
+    //Getting data from intent and setting up the UI
     private fun setupUi(){
         id = intent.getStringExtra("ID")
         name = intent.getStringExtra("USER_NAME")
@@ -148,6 +150,7 @@ class WallpaperDetailsActivity : AppCompatActivity() {
     }
 
     private fun addWallpaperToFavorites(){
+        //Checking if the selected image is already in favorites so it doesn't add duplicates
         for (i in mFavoritesList.indices){
             if(mFavoritesList[i].id == id) {
                 Toast.makeText(this, "This image is already in favorites", Toast.LENGTH_SHORT).show()
@@ -157,7 +160,7 @@ class WallpaperDetailsActivity : AppCompatActivity() {
 
         val image = Urls(imageUrl!!)
         val user = User(name!!)
-        val favoriteWallpaper = Wallpaper(
+        val favoriteWallpaper = Wallpaper(  //Creating wallpaper with given attributes,
             altDescription!!,
             description,
             id!!,
@@ -166,12 +169,14 @@ class WallpaperDetailsActivity : AppCompatActivity() {
             image,
             user
         )
+        mFavoritesList.add(favoriteWallpaper) //adding it to the list
 
-        mFavoritesList.add(favoriteWallpaper)
-        saveData()
+        saveData() //and saving the list to shared preferences
+
         Toast.makeText(this, "Added to favorites", Toast.LENGTH_SHORT).show()
     }
 
+    //Saving data in shared preferences
     private fun saveData(){
         val sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE)
         val edit: SharedPreferences.Editor = sharedPreferences.edit()

@@ -5,6 +5,8 @@ import com.elviva.wallpaperboi.util.Constants.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
+//Retrofit instance where we can call the api
 object RetrofitInstance {
 
     val api: WallpaperAPI by lazy {

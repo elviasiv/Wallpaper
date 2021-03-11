@@ -55,6 +55,8 @@ class MainActivity : AppCompatActivity() {
             binding.progressBar.isVisible = false
         }
 
+        //Setting on click listeners for each wallpaper in recycler view
+        //Once pressed on wallpaper we put data in intent and start the details activity
         wallpaperAdapter.setOnClickListener(object: WallpaperAdapter.OnClickListener{
             override fun onClick(position: Int) {
                 val intent = Intent(this@MainActivity, WallpaperDetailsActivity::class.java)
@@ -70,12 +72,15 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        //Wanted to implement bottom navigation bar but decided to have simple FAB
+        //which would take us between favorites and main activity
         binding.fabMain.setOnClickListener {
             startActivity(Intent(this, FavoritesActivity::class.java))
         }
 
     }
 
+    //Setting up the recycler view with adapter
     private fun setupRecyclerView(){
         binding.rvWallpapers.apply {
             wallpaperAdapter = WallpaperAdapter(this@MainActivity)
@@ -85,6 +90,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    //Loading data from shared preferences
     private fun loadData(){
         var sharedPreferences = getSharedPreferences("shared preferences", MODE_PRIVATE)
         var gson = Gson()
